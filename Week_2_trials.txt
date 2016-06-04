@@ -1,0 +1,113 @@
+Python 2.7.11 (v2.7.11:6d1b6a68f775, Dec  5 2015, 20:32:19) [MSC v.1500 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> import re
+>>> line = "gfouhefhefhi"
+>>> re.search('From: ', line)
+>>> print re.search('From: ', line)
+None
+>>> line = "From: abc@xyz.com From: from: FROM:"
+>>> print re.search('From: ', line)
+<_sre.SRE_Match object at 0x02EA8640>
+>>> flag = re.search('From: ', line)
+>>> print flag
+<_sre.SRE_Match object at 0x02EA8640>
+>>> if re.search('$From:', line):
+	print "Yo!"
+
+	
+>>> import re
+>>> if re.search('$From:', line):
+	print "Yo!"
+
+	
+>>> line = "From: abc@xyz.com From: from: FROM:"
+>>> if re.search('^From:', line):
+	print "Yo!"
+else:
+	print "I'm confused :P"
+
+	
+Yo!
+>>> y = re.findall('[0-9]+',line)
+>>> print y
+[]
+>>> line2 = "gjvefwgy6773426hvwefh"
+>>> y = re.findall('[0-9]+',line2)
+>>> print y
+['6773426']
+>>> line3 = "gfwhk6586hvbrfhk68hvbke5867"
+>>> y = re.findall('[0-9]+',line3)
+>>> print y
+['6586', '68', '5867']
+>>> y = re.findall('[aeiou]+',line3)
+>>> print y
+['e']
+>>> line4 = "fdgeafgfgyiougfdjfiyfvgfjgeau"
+>>> y = re.findall('[0-9]+',line4)
+>>> print y
+[]
+>>> y = re.findall('[aeiou]+',x)
+
+Traceback (most recent call last):
+  File "<pyshell#32>", line 1, in <module>
+    y = re.findall('[aeiou]+',x)
+NameError: name 'x' is not defined
+>>> y = re.findall('[aeiou]+',line4)
+>>> print y
+['ea', 'iou', 'i', 'eau']
+>>> x = 'From: Using the : character'
+>>> y = re.findall('^F.+:', x)
+>>> print y
+['From: Using the :']
+>>> y = re.findall('^F.+?:', x)
+>>> print y
+['From:']
+>>> x = "From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008"
+>>> y = re.findall('\S+@\S+', x)
+>>> print y
+['stephen.marquard@uct.ac.za']
+>>> y = re.findall('^From (\S+@\S+)', x)
+>>> print y
+['stephen.marquard@uct.ac.za']
+>>> z = "Zrom stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008"
+>>> y = re.findall('From (\S+@\S+)', x)
+>>> print y
+['stephen.marquard@uct.ac.za']
+>>> z = "From glefulhdfljkdfkhfadlkfdh stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008"
+>>> y = re.findall('^From.*? (\S+@\S+)', z)
+>>> print y
+['stephen.marquard@uct.ac.za']
+>>> y = re.findall('^From.* (\S+@\S+)', z)
+>>> print y
+['stephen.marquard@uct.ac.za']
+>>> y = re.findall('^From .* (\S+@\S+)', z)
+>>> print y
+['stephen.marquard@uct.ac.za']
+>>> z = "From glefulhdfljkdfkhfadlkfdh stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008 hdfljkdfkhfadlkfdh johann.marquard@uct.ac.za 09:14:16 2008"
+>>> y = re.findall('^From .* (\S+@\S+)', z)
+>>> print y
+['johann.marquard@uct.ac.za']
+>>> y = re.findall('^From .*? (\S+@\S+)', z)
+>>> print y
+['stephen.marquard@uct.ac.za']
+>>> y = re.findall('^From .*? (\S+@\S+)*', z)
+>>> print y
+['stephen.marquard@uct.ac.za']
+>>> y = re.findall('(\S+@\S+)+', z)
+>>> print y
+['stephen.marquard@uct.ac.za', 'johann.marquard@uct.ac.za']
+>>> y = re.findall('@([^ ]*)',z)
+>>> print y
+['uct.ac.za', 'uct.ac.za']
+>>> y = re.findall('^[From] (\S+@\S+)+', z)
+>>> print y
+[]
+>>> 
+
+
+
+
+Assignment better solution:
+
+import re
+print sum( [ ****** *** * in **********('[0-9]+',**************************.read()) ] )
