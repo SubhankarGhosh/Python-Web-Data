@@ -1,0 +1,100 @@
+Python 2.7.11 (v2.7.11:6d1b6a68f775, Dec  5 2015, 20:32:19) [MSC v.1500 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> import json
+>>> import xml.etree.ElementTree as ET
+>>> data = '''<person>
+<name>Chuck</name>
+<phone type="intl">
++1 734 303 4456
+</phone>
+<email hide="yes"/>
+</person>'''
+>>> tree = ET.fromstring(data)
+>>> print 'Name:',tree.find('name').text
+Name: Chuck
+>>> print 'Name:',tree.find('phone').text
+Name: 
++1 734 303 4456
+
+>>> print 'Phone:',tree.find('phone').type
+Phone:
+
+Traceback (most recent call last):
+  File "<pyshell#6>", line 1, in <module>
+    print 'Phone:',tree.find('phone').type
+AttributeError: 'Element' object has no attribute 'type'
+>>> print 'Phone:',tree.find('phone').get('type')
+Phone: intl
+>>> print 'Attr:',tree.find('email').get('hide')
+Attr: yes
+>>> input = '''<stuff>
+<users>
+<user x="2">
+<id>001</id>
+<name>Chuck</name>
+</user>
+<user x="7">
+<id>009</id>
+<name>Brent</name>
+</user>
+</users>
+</stuff>'''
+>>> stuff = ET.fromstring(input)
+>>> lst = stuff.findall('users/user')
+>>> print 'User count:', len(lst)
+User count: 2
+>>> for item in lst:
+print 'Name', item.find('name').text
+print 'Id', item.find('id').text
+print 'Attribute', item.get("x")
+  File "<pyshell#13>", line 3
+    print 'Name', item.find('name').text
+        ^
+IndentationError: expected an indented block
+>>> for item in lst:
+	print 'Name', item.find('name').text
+	print 'Id', item.find('id').textprint 'Attribute', item.get("x")
+	
+SyntaxError: invalid syntax
+>>> for item in lst:
+	print 'Name', item.find('name').text
+	print 'Id', item.find('id').textprint 'Attribute', item.get("x")
+	
+SyntaxError: invalid syntax
+>>> for item in lst:
+	print 'Name', item.find('name').text
+	print 'Id', item.find('id').text
+	print 'Attribute', item.get("x")
+
+	
+Name Chuck
+Id 001
+Attribute 2
+Name Brent
+Id 009
+Attribute 7
+>>> lst2 = stuff.findall('id')
+>>> print lst2
+[]
+>>> lst = stuff.findall('users/user/id')
+>>> print lst2
+[]
+>>> print lst
+[<Element 'id' at 0x31edf70>, <Element 'id' at 0x326e030>]
+>>> for item in lst:
+	print 'Id', item.find('id').text
+
+	
+Id
+
+Traceback (most recent call last):
+  File "<pyshell#26>", line 2, in <module>
+    print 'Id', item.find('id').text
+AttributeError: 'NoneType' object has no attribute 'text'
+>>> for item in lst:
+	print 'Id', item.text
+
+	
+Id 001
+Id 009
+>>> 
