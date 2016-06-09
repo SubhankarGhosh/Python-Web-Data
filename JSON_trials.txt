@@ -1,0 +1,84 @@
+Python 2.7.11 (v2.7.11:6d1b6a68f775, Dec  5 2015, 20:32:19) [MSC v.1500 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> import json
+>>> data = '''{
+"name" : "Chuck",
+"phone" : {
+"type" : "intl",
+"number" : "+1 734 303 4456"
+},
+"email" : {
+"hide" : "yes"
+}
+}'''
+>>> info = json.loads(data)
+>>> print 'Name:',info["name"]
+Name: Chuck
+>>> print 'Hide:',info["email"]["hide"]
+Hide: yes
+>>> print info["phone"]["number"]
++1 734 303 4456
+>>> import json
+input = '''[
+{ "id" : "001",
+"x" : "2",
+"name" : "Chuck"
+} ,
+{ "id" : "009",
+"x" : "7",
+"name" : "Chuck"
+}
+]'''
+>>> info = json.loads(input)
+
+Traceback (most recent call last):
+  File "<pyshell#7>", line 1, in <module>
+    info = json.loads(input)
+  File "C:\Python27\lib\json\__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "C:\Python27\lib\json\decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+>>> import json
+>>> input = '''[
+{ "id" : "001",
+"x" : "2",
+"name" : "Chuck"
+} ,
+{ "id" : "009",
+"x" : "7",
+"name" : "Chuck"
+}
+]'''
+>>> info = json.loads(input)
+>>> print 'User count:', len(info)
+User count: 2
+>>> for item in info:
+	print item
+
+	
+{u'x': u'2', u'id': u'001', u'name': u'Chuck'}
+{u'x': u'7', u'id': u'009', u'name': u'Chuck'}
+>>> for item in info:
+	print 'Name', item['name']
+	print 'Id', item['id']
+	print 'Attribute', item['x']
+
+	
+Name Chuck
+Id 001
+Attribute 2
+Name Chuck
+Id 009
+Attribute 7
+>>> print info["id"]
+
+Traceback (most recent call last):
+  File "<pyshell#20>", line 1, in <module>
+    print info["id"]
+TypeError: list indices must be integers, not str
+>>> print info[0]["id"]
+001
+>>> json.dumps([1,2,3,{'4': 5, '6': 7}], separators=(';',':'))
+'[1;2;3;{"4":5;"6":7}]'
+>>> 
